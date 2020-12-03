@@ -185,15 +185,15 @@ public class roadTrip extends graph
     private int getDistance(String vertex1, String vertex2)
     {
         int distance = 0;
-        for(edge edgePoint: graph.edgeCases)
+        for(edge edgePoint: graph.weightedEdge)
         {
-            if(edgePoint.pointA.equals(vertex1)&&edgePoint.pointB.equals(vertex2))
+            if(edgePoint.locA.equals(vertex1)&&edgePoint.locB.equals(vertex2))
             {
-                return edgePoint.weight;
+                return edgePoint.distance;
             }
-            else if (edgePoint.pointA.equals(vertex2)&&edgePoint.pointB.equals(vertex1))
+            else if (edgePoint.locA.equals(vertex2)&&edgePoint.locB.equals(vertex1))
             {
-                return edgePoint.weight;
+                return edgePoint.distance;
             }
         }
         return distance;
@@ -202,15 +202,15 @@ public class roadTrip extends graph
     private int getTime(String vertex1, String vertex2)
     {
         int time = 0;
-        for(edge edgePoint: graph.edgeCases)
+        for(edge edgePoint: graph.weightedEdge)
         {
-            if(edgePoint.pointA.equals(vertex1)&&edgePoint.pointB.equals(vertex2))
+            if(edgePoint.locA.equals(vertex1) && edgePoint.locB.equals(vertex2))
             {
-                return edgePoint.minutes;
+                return edgePoint.time;
             }
-            else if (edgePoint.pointA.equals(vertex2)&&edgePoint.pointB.equals(vertex1))
+            else if (edgePoint.locA.equals(vertex2)&&edgePoint.locA.equals(vertex1))
             {
-                return edgePoint.minutes;
+                return edgePoint.time;
             }
         }
         return time;
@@ -250,7 +250,7 @@ public class roadTrip extends graph
         plan.Attractions(attractionsFile);
         plan.roads(roadsFile);
         List<String> attractionPlans= new ArrayList<>();
-        attractionPlans.add("Statue of Liberty");
+        attractionPlans.add("Atlantic City Boardwalk");
         List<String> path = plan.route("Miami FL", "Boston MA",attractionPlans);
         plan.printRoads(path);
     }
