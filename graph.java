@@ -2,49 +2,45 @@ import java.util.*;
 public class graph
 {
     Hashtable<String,List<String>> adjacentList;
-    List<edge> edgeCases;
+    List<edge> weightedEdge;
 
     public graph()
     {
         adjacentList = new Hashtable<>();
-        edgeCases = new ArrayList();
+        weightedEdge = new ArrayList();
     }
-
     public class edge
     {
-        String pointA;
-        String pointB;
-        int weight;
-        int minutes;
-        public edge( String pointA, String pointB, int weight, int minutes)
+        String locA;
+        String locB;
+        int distance;
+        int time;
+        public edge( String locA, String locB, int distance, int time)
         {
-            this.pointA = pointA;
-            this.pointB = pointB;
-            this.weight = weight;
-            this.minutes = minutes;
+            this.locA = locA;
+            this.locB = locB;
+            this.distance = distance;
+            this.time = time;
         }
     }
-
     public void addNode(String location)
     {
         adjacentList.putIfAbsent(location,new ArrayList<>());
     }
-
-    public void addEdge(String pointA, String pointB, int distance, int time)
+    public void addEdge(String locA, String locB, int distance, int time)
     {
-        addNode(pointA);
-        addNode(pointB);
-        adjacentList.get(pointA).add(pointB);
-        adjacentList.get(pointB).add(pointA);
-        edgeCases.add(new edge(pointA,pointB,distance,time));
+        addNode(locA);
+        addNode(locB);
+        adjacentList.get(locA).add(locB);
+        adjacentList.get(locB).add(locA);
+        weightedEdge.add(new edge(locA,locB,distance,time));
     }
-
     public void showConnections()
     {
         String connections ="";
-        for( edge edge: edgeCases)
+        for(edge edge: weightedEdge)
         {
-            connections+=edge.pointA+ "--->"+edge.pointB+" "+edge.weight+ " "+edge.minutes+"\n";
+            connections += edge.locA+ "--->"+edge.locB+" "+edge.distance+ " "+edge.time+"\n";
         }
         System.out.println(connections);
     }
